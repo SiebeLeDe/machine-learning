@@ -1,0 +1,19 @@
+name: hrsmc_ml4chem
+channels:
+  - conda-forge
+  - default
+dependencies:
+  - ipywidgets
+  - jupyterlab
+  - matplotlib
+  - notebook
+  - numpy
+  - python
+  - pytorch
+  - pytorch_geometric
+  - rdkit
+  - scipy
+  - seaborn
+  - pytorch::torchaudio
+  - pytorch::torchvision
+  - pandas
