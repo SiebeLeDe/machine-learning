@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.defaultInterpreterPath": "/Users/siebeld/miniforge3/envs/hrsmc_ml4chem/bin/python"
+	}
+}
