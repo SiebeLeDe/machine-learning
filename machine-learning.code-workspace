@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"python.defaultInterpreterPath": "/Users/siebeld/miniforge3/envs/hrsmc_ml4chem/bin/python"
+		// "python.defaultInterpreterPath": "${userHome}/miniforge3/envs/hrsmc_ml4chem/bin/python"
+		"python.defaultInterpreterPath": "${userHome}/miniforge3/envs/hrsmc_ml4chem/python.exe"
 	}
 }
