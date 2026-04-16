@@ -11,3 +11,7 @@ wheels/
 
 # MacOS-specific files
 .DS_Store
+
+# Presentation files
+*.pptx
+*.pdf
