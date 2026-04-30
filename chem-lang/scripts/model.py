@@ -120,31 +120,23 @@ class CLM:
             keras.callbacks.ModelCheckpoint(
                 filepath=os.path.join(self.saving_path, "all-epochs", "model-{epoch:02d}.keras"),
                 monitor="val_loss",
-                save_best_only=False, 
+                save_best_only=False,
             ),
-            keras.callbacks.EarlyStopping(
-                monitor="val_loss", mode="min", min_delta=0.0001, patience=5
-            ),
+            keras.callbacks.EarlyStopping(monitor="val_loss", mode="min", min_delta=0.0001, patience=5),
         ]
 
         inputs = keras.layers.Input((None, xTrain.shape[2]))
         model = keras.models.Model(inputs=[inputs], outputs=self.call(inputs))
 
         # Define the optimizer with gradient clipping
-        updated_optimizer = keras.optimizers.Adam(
-            learning_rate=self.learning_rate, clipnorm=1.0
-        )
+        updated_optimizer = keras.optimizers.Adam(learning_rate=self.learning_rate, clipnorm=1.0)
 
         # Calling of the weights of the (in the past) trained model
-        trained_model = keras.models.load_model(
-            os.path.join(self.pre_trained_model_path, "model.h5")
-        )
+        trained_model = keras.models.load_model(os.path.join(self.pre_trained_model_path, "model.h5"))
 
         model.set_weights(trained_model.get_weights())
 
-        model.compile(
-            optimizer=updated_optimizer, loss=self.loss, metrics=[self.metrics]
-        )
+        model.compile(optimizer=updated_optimizer, loss=self.loss, metrics=[self.metrics])
 
         # Training of the model
         history = model.fit(
@@ -157,14 +149,12 @@ class CLM:
             callbacks=my_callbacks,
         )
 
-        # Keras only allows saving of checkpoints during training in .keras format 
+        # Keras only allows saving of checkpoints during training in .keras format
         # So we also save the final epoch's checkpoint to .h5 format
         model.save(os.path.join(self.saving_path, "model.h5"))
 
         # Save the training history for loss curve plotting.
-        with open(
-            os.path.join(self.saving_path, "training_history.pkl"), "wb"
-        ) as history_file:
+        with open(os.path.join(self.saving_path, "training_history.pkl"), "wb") as history_file:
             pickle.dump(history.history, history_file)
 
         return model, history
@@ -179,9 +169,7 @@ class CLM:
         """
 
         if self.mode != "Predict":
-            raise ValueError(
-                'Mode of the Model is still in "Train" or "Finetune". Call "Predict" mode.'
-            )
+            raise ValueError('Mode of the Model is still in "Train" or "Finetune". Call "Predict" mode.')
 
         inputs = keras.layers.Input(batch_shape=(self.batch_size, None, self.info_size))
         model = keras.models.Model(inputs=[inputs], outputs=self.call(inputs))
