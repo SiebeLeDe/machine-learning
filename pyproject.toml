@@ -13,4 +13,5 @@ members = [
     "bayesian",
     "hyperparameter",
     "chem-language",
+    "chem-lang",
 ]
